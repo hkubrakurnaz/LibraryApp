@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--https://codepen.io/TheLukasWeb/pen/qlGDa -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href= "/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
+    
+    <style>
+    
+    #myAccount {
+      
+        position: absolute;
+        top: 0px;
+        right: 1px;
+    }
+    input[type=text1], select {
+      width: 50%;
+  padding: 12px 10px;
+  margin: 22px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+    }
+    </style>
+    </head>
+    
+    <body>
+    <div class="topnav">
+      <a class="active" href="/admin" ><i class="fa fa-home"></i></a>
+      <a href="/addbook" >Kitap Ekle</a>
+      <a href="/admin">Zaman Atla</a>
+      <a href="/listusers">Kullanıcılar</a>
+      <a href = "/logout" class='fa fa-sign-out' style='font-size:20px' id = "myAccount" aria-hidden="true"></a>
+    </div>
+   
+    
+
+   <div >
+       <form
+      id="frmUploader"
+      enctype="multipart/form-data"
+      action="/upload"
+      method="post"
+    >
+
+     <input type="text1" id="fname" name="bookname" placeholder="Kitap ismi...">
+     <p>
+      <input type="file" name="image" multiple />
+
+      <input type="submit" name="submit" id="btnSubmit" value="Upload" />
+    </form>
+   </div>
+    
+    <!--
+    <form
+      id="frmUploader"
+      enctype="multipart/form-data"
+      action="/upload"
+      method="post"
+    >
+    <div class="bg-image"></div>
+
+
+     <input type="text1" id="fname" name="bookname" placeholder="Kitap ismi...">
+     <p>
+      <input type="file" name="image" multiple />
+
+      <input type="submit" name="submit" id="btnSubmit" value="Upload" />
+    </form>-->
+    
+    </body>
+</html>

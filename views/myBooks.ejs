@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href= "/css/style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+#myAccount {
+  position: absolute;
+  top: 0px;
+  right: 1px;
+}
+
+#myInput {
+  background-image: url('/css/search.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <a class="active" href="/user" ><i class="fa fa-home"></i></a>
+  <a href="/newbook" >Kitap Al</a>
+  <a href="/givebook">Kitap Teslim Et</a>
+  <a href="/mybooks">Kitaplarım</a>
+  <a href = "/logout" class='fa fa-sign-out' style='font-size:20px' id = "myAccount" aria-hidden="true"></a>
+</div>
+<h2>User:</h2>
+<form action="search" method="post">
+      <input type="text" id="myInput" placeholder="Search.." name="search">
+</form>
+
+<table id="myTable">
+  <tr class="header">
+    <th style="width:20%;">ISBN</th>
+    <th style="width:40%;">Kitap Adı</th>
+    <th style="width:40%;">Tarih</th>
+  </tr>
+  <tbody>
+   
+    <%for(var i=0; i<users.length;i++){%>
+     <tr>
+      <th><%=users[i].isbnnumber%></th>
+      <th><%=users[i].bookname %></th>
+      <th><%=users[i].date%> </th>
+       </tr>
+    <%}%>
+   
+  </tbody>
+  
+</table>
+
+
+
+</body>
+</html>

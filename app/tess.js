@@ -34,6 +34,7 @@ module.exports.upload = function(req, res, err) {
                 encoding: null
             }
         );
+        Tesseract.maximumRecognitionTime = 2.0;
         Tesseract.recognize(image)
             .progress(function(p) {
                 console.log('progress', p);

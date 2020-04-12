@@ -47,6 +47,10 @@ module.exports = function(app, passport) {
         res.redirect('/');
     })
 
+    app.get('/skiptime', function(req, res) {
+        res.render('skipTime.ejs');
+    });
+
     app.get('/givebook', function(req, res) {
         res.render('giveBook.ejs')
     })
@@ -63,6 +67,8 @@ module.exports = function(app, passport) {
     app.post('/addBook', adminController.addBook);
 
     app.post('/newbook', userController.newBook);
+
+    app.post('/skiptime', userController.skipTime);
 
 
 

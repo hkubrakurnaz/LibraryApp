@@ -2,7 +2,26 @@ var dbconfig = require('../config/database');
 var mysql = require('mysql');
 var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
+var date = dateNow();
+var flag = 0;
 
+module.exports.skipTime = function(req, res) {
+    var day = parseInt(req.body.time);
+    console.log(typeof date.tdd);
+    date.tdd = date.tdd + day;
+
+    if (date.tdd > 31)
+        date.tmm = date.tmm + 1;
+    if (date.tmm > 12)
+        date.tyy = date.tyyyy + 1;
+
+
+    var newDate = date.tdd + '/' + date.tmm + '/' + date.tyyyy;
+    date = { today: newDate, tdd: date.tdd, tmm: date.tmm, tyyyy: date.tyyyy };
+    console.log("Date:" + newDate);
+    res.render('admin', { message: 'Tarih Değiştirildi...' });
+
+}
 module.exports.list = function(req, res) {
     var user_id = req.user.id;
     console.log("id:" + user_id);
@@ -15,7 +34,6 @@ module.exports.list = function(req, res) {
                     res.render('user', { message: 'Aranan kitap bulunmamaktadır.' });
                     res.end();
                 } else {
-                    console.log("dfsdf");
                     res.render('myBooks', { users: result });
                 }
             });
@@ -87,38 +105,39 @@ module.exports.newBook = function(req, res) {
         connection.query('SELECT * from books_info WHERE username = ?', [user_id], function(err, result) {
             if (err) throw err;
             if (result.length == 0) {
-                app.render('user', { message: 'Hata!' });
+                res.render('user', { message: 'Hata!' });
                 res.end();
             } else if (result.length > 0) {
 
                 var value;
                 for (var i = 0; i < result.length; i++) {
-                    value = checkDate();
+                    value = checkDate(result[i].date);
                     if (value == 0) {
-                        app.render('user', {
-                            message: 'Teslim tarihi geçmiş kitap bulunmaktadır. Lütfen kitabı teslim ettikten' +
+                        res.render('user', {
+                            message: 'Teslim tarihi geçmiş kitap bulunmaktadır. Lütfen kitabı teslim ettikten ' +
                                 'sonra tekrar deneyin!'
                         });
                         res.end();
-                    }
+                    } else
+                        flag = 1;
 
                 }
 
-                var sql = "UPDATE books SET status = ? WHERE id = ?;" +
-                    "UPDATE users SET totalbook = ? WHERE id = ?;" +
-                    "INSERT INTO books_info (username,bookname,date) VALUES (?, ? ,?)";
+                if (flag == 1) {
+                    var sql = "UPDATE books SET status = ? WHERE id = ?;" +
+                        "UPDATE users SET totalbook = ? WHERE id = ?;" +
+                        "INSERT INTO books_info (username,bookname,date) VALUES (?, ? ,?)";
 
-                connection.query(sql, [1, book_id, req.user.totalbook - 1, user_id, user_id, book_id, dateNow().today], function(err, result) {
-                    if (err) throw err;
-                    if (result.length == 0) {
-                        res.render('user', { message: 'Hata!' });
-                        res.end();
-                    } else {
+                    connection.query(sql, [1, book_id, req.user.totalbook + 1, user_id, user_id, book_id, date.today], function(err, result) {
+                        if (err) throw err;
+                        if (result.length == 0) {
+                            res.render('user', { message: 'Hata!' });
+                            res.end();
+                        }
                         res.render('user', { message: 'Kitap Alındı!' });
-                        res.end();
-                    }
 
-                });
+                    });
+                }
             }
         });
     }
@@ -178,18 +197,19 @@ module.exports.givebook = function(req, res) {
     }
 }
 
-function checkDate(date) {
-    var date = new Date();
-    var rdd = date.getDate(); // r:record
-    var rmm = date.getMonth() + 1;
-    var ryyyy = date.getFullYear();
+function checkDate(newDate) {
+    console.log('Date:' + newDate);
+    console.log('Date:' + typeof newDate);
+    var rdd = newDate.substring(0, 2); // r:record
+    var rmm = newDate.substring(3, 5);;
+    var ryyyy = newDate.substring(6, 10);
 
     if (rdd < 10)
         rdd = '0' + rdd;
     if (rmm < 10)
         rmm = '0' + rmm;
 
-    if (date.tyyy > ryyyy || date.tmm > rmm || date.tdd > rdd)
+    if (date.tdd - rdd > 7)
         return 0;
     return 1;
 }
@@ -207,5 +227,5 @@ function dateNow() {
 
     today = tdd + '/' + tmm + '/' + tyyyy;
 
-    return { today: today, tdd: tdd, tmm: tmm, tyyyy: tyyyy };;
+    return { today: today, tdd: tdd, tmm: tmm, tyyyy: tyyyy };
 }

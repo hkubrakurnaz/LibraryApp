@@ -42,11 +42,17 @@ module.exports.upload = function(req, res, err) {
             .then(function(result) {
                 var str = result.text;
 
+                console.log(str);
+
+                var pos = str.search("ISBN");
+                var res = str.slice(pos + 5, pos + 22);
+                console.log("Res:" + res);
+
                 if (req.user.status == "user") {
-                    userCont.giveBook(str, req.user.id, req.user.totalbook);
+                    userCont.giveBook(res, req.user.id, req.user.totalbook);
                 } else if (req.user.status == "admin") {
-                    console.log('User id:' + req.body.bookname);
-                    adminCont.addBook(req.body.bookname, str);
+                    console.log('Book id:' + req.body.bookname);
+                    adminCont.addBook(req.body.bookname, res);
                 }
 
             });

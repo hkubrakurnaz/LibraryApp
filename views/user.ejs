@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_anim_search-->
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,55 +16,22 @@
     border-radius: 10px 10px 10px 10px;
     min-width: 320px;
 }
-input[type=text1], select {
-  width: 50%;
-  padding: 12px 150px;
-  margin: 22px 10px;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+input[type=text] {
+  width: 180px;
   box-sizing: border-box;
-
-}
-.upload-btn-wrapper {
-  position: relative;
-  margin: 10px 20px;
-  overflow: hidden;
-  display: inline-block;
-   
-}
-
-.btn {
- 
-  color: gray;
-  background-color: white;
-  padding: 8px 30px;
- 
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-  
-}
-
-.upload-btn-wrapper input[type=file] {
-  font-size: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-}
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 12px 22px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
   font-size: 16px;
-  margin: -5px 10px;
-  cursor: pointer;
-  border-radius: 8px;
+  background-color: white;
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 40%;
 }
 
 #myAccount {
@@ -81,6 +49,9 @@ input[type=text1], select {
   <a href="/newbook" >Kitap Al</a>
   <a href="/givebook">Kitap Teslim Et</a>
   <a href="/mybooks">Kitaplarım</a>
+  <form  action="search" method="post">
+   <input type="text" name="search" placeholder="Ara..">
+  </form>
   <a href = "/logout" class='fa fa-sign-out' style='font-size:20px' id = "myAccount" aria-hidden="true"></a>
 </div>
 

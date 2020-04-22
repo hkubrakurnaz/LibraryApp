@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <style>
-
 html{
    background-color: #D5F3FE
 }
@@ -37,15 +36,34 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 }
+input[type=ara] {
+  width: 180px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+input[type=ara]:focus {
+  width: 40%;
+}
 </style>
 </head>
 <body>
 
 <div class="topnav">
-  <a class="active" href="/admin" ><i class="fa fa-home"></i></a>
+  <a class="active" href="/user" ><i class="fa fa-home"></i></a>
   <a href="/newbook" >Kitap Al</a>
   <a href="/givebook">Kitap Teslim Et</a>
   <a href="/mybooks">Kitaplarım</a>
+  <form  action="search" method="post">
+   <input type="ara"  placeholder="Ara..">
+  </form>
   <a href = "/logout" class='fa fa-sign-out' style='font-size:20px' id = "myAccount" aria-hidden="true"></a>
 </div>
 

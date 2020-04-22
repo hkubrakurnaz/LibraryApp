@@ -13,18 +13,30 @@
   html{
    padding:50px;
   }
+  .header {
+  padding: 30px;
+  text-align: center;
+  color: black;
+  font-size: 30px;
   
+}
+body {
+  background-image: url('/css/background.jpg');
+}
  </style>
 </head>
 <body>
+<div class="header">
+  <h1>KÜTÜPHANE UYGULAMASI</h1>
+</div>
 <div class="login-image"></div>
 <div class="login">
   
   <form action="auth" method="post">
   <div class="login-form">
-    <h3>Kullanıcı Adı:</h3>
+    <h3>Kullanıcı Adı</h3>
     <input type="text" placeholder="Kullanıcı Adı"  name="username"/><br>
-    <h3>Şifre:</h3>
+    <h3>Şifre</h3>
     <input type="password" placeholder="Şifre"  name="password"/>
     <br>
     <input type="submit" value="Login" class="login-button"/>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--https://www.w3schools.com/css/css_table.asp-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href= "/css/style.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {
   box-sizing: border-box;
@@ -16,36 +18,52 @@
   right: 1px;
 }
 
-#myInput {
-  background-image: url('/css/search.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-   margin-top: 12px;
+table.center {
+    width:70%; 
+    margin-top:3%;
+    margin-left:20%; 
+    margin-right:15%;
 }
-
-#myTable {
+#users {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 60%;
+  
+}
+
+#users td, #users th {
   border: 1px solid #ddd;
-  font-size: 18px;
+  padding: 8px;
 }
 
-#myTable th, #myTable td {
+#users tr:nth-child(even){background-color: #f2f2f2;}
+
+#users tr:hover {background-color: #ddd;}
+
+#users th {
+  padding-top: 12px;
+  padding-bottom: 12px;
   text-align: left;
-  padding: 12px;
+  background-color: #2196F3;
+  color: white;
+}
+input[type=text] {
+  width: 180px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('search.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
 
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
+input[type=text]:focus {
+  width: 40%;
 }
 </style>
 </head>
@@ -55,26 +73,25 @@
   <a href="/newbook" >Kitap Al</a>
   <a href="/givebook">Kitap Teslim Et</a>
   <a href="/mybooks">Kitaplarım</a>
+ <form  action="search" method="post">
+  <input type="text" name="search" placeholder="Ara..">
+</form>
   <a href = "/logout" class='fa fa-sign-out' style='font-size:20px' id = "myAccount" aria-hidden="true"></a>
 </div>
 
-<form action="search" method="post">
-      <input type="text" id="myInput" placeholder="Ara.." name="search">
-</form>
-
-<table id="myTable">
+<table id="users" class = "center">
   <tr class="header">
-    <th style="width:20%;">ISBN</th>
-    <th style="width:40%;">Kitap Adı</th>
-    <th style="width:40%;">Tarih</th>
+    <th style="width:40%;">ISBN</th>
+    <th style="width:30%;">Kitap Adı</th>
+    <th style="width:30%;">Tarih</th>
   </tr>
   <tbody>
    
     <%for(var i=0; i<users.length;i++){%>
      <tr>
-      <th><%=users[i].isbnnumber%></th>
-      <th><%=users[i].bookname %></th>
-      <th><%=users[i].date%> </th>
+      <td><%=users[i].isbnnumber%></th>
+      <td><%=users[i].bookname %></th>
+      <td><%=users[i].date%> </th>
        </tr>
     <%}%>
    

@@ -1,3 +1,4 @@
+<!--https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,54 +11,53 @@
 * {
   box-sizing: border-box;
 }
+table.center {
+    width:70%; 
+    margin-top:7%;
+    margin-left:20%; 
+    margin-right:15%;
+}
+#users {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  
+}
+
+#users td, #users th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#users tr:nth-child(even){background-color: #f2f2f2;}
+
+#users tr:hover {background-color: #ddd;}
+
+#users th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #2196F3;
+  color: white;
+}
 #myAccount {
   position: absolute;
   top: 0px;
   right: 1px;
 }
 
-#myInput {
-  background-image: url('/css/search.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-
-#myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 18px;
-}
-
-#myTable th, #myTable td {
-  text-align: left;
-  padding: 12px;
-}
-
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-}
 </style>
 </head>
 <body>
 <div class="topnav">
   <a class="active" href="/admin" ><i class="fa fa-home"></i></a>
   <a href="/addbook" >Kitap Ekle</a>
-  <a href="/admin">Zaman Atla</a>
+  <a href="/skiptime">Zaman Atla</a>
   <a href="/listusers">Kullanıcılar</a>
   <a href = "/logout" class='fa fa-sign-out' style='font-size:20px' id = "myAccount" aria-hidden="true"></a>
 </div>
 
-<table id="myTable">
+<table id="users" class="center">
   <tr class="header">
     <th style="width:50%;">Kullacını Adı</th>
     <th style="width:45%;">Kitap Adı</th>
@@ -66,8 +66,8 @@
    
     <%for(var i=0; i<users.length;i++){%>
      <tr>
-      <th><%=users[i].username%></th>
-      <th><%=users[i].bookname %></th>
+      <td><%=users[i].username%></th>
+      <td><%=users[i].bookname %></th>
        </tr>
     <%}%>
    

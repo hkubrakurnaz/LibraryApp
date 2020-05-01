@@ -11,13 +11,22 @@ module.exports.addBook = function(req, res) {
         console.log("ISBN:" + isbn);
 
         if (bookName && isbn) {
-            var insertQuery = "INSERT INTO books (bookname, isbnnumber,status) values (?, ?, ?)";
-            connection.query(insertQuery, [bookName, isbn, false], function(err, result) {
+            connection.query('SELECT * from books WHERE bookname = ?', [bookName], function(err, result) {
                 if (err) throw err;
-                console.log("1 record inserted");
-                res.render('admin', { message: 'Kitap Eklendi' });
-                res.end();
+                if (result.length == 0) {
+                    var insertQuery = "INSERT INTO books (bookname, isbnnumber,status) values (?, ?, ?)";
+                    connection.query(insertQuery, [bookName, isbn, false], function(err, result) {
+                        if (err) throw err;
+                        console.log("1 record inserted");
+                        res.render('admin', { message: 'Kitap Eklendi' });
+                        res.end();
+                    });
+                } else if (result.length > 0) {
+                    res.render('admin', { message: 'Bu kitap sistemde kayıtlıdır.' });
+                    res.end();
+                }
             });
+
         }
     }
 }

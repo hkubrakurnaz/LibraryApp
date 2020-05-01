@@ -44,8 +44,12 @@ module.exports.upload = function(req, res, err) {
 
                 console.log(str);
 
-                var pos = str.search("ISBN");
-                var res = str.slice(pos + 5, pos + 22);
+                //var pos = str.search("ISBN");
+                //var res = str.slice(pos + 5, pos + 22);
+                var res = str.split('\n')[0];
+                if (res.includes("ISBN")) {
+                    res = res.replace("ISBN", "");
+                }
                 console.log("Res:" + res);
 
                 if (req.user.status == "user") {

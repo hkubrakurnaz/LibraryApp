@@ -112,7 +112,7 @@ module.exports.newBook = function(req, res) {
             }
         });
         connection.query('SELECT * from books_info WHERE username = ?', [user_id], function(err, result) {
-
+            console.log("Length:" + result.length);
             if (err) throw err;
 
             if (result.length >= 0) {
@@ -136,15 +136,16 @@ module.exports.newBook = function(req, res) {
                         "UPDATE users SET totalbook = ? WHERE id = ?;" +
                         "INSERT INTO books_info (username,bookname,date) VALUES (?, ? ,?)";
 
-                    connection.query(sql, [1, book_id, req.user.totalbook + 1, user_id, user_id, book_id, date.today], function(err, result) {
-                        if (err) throw err;
-                        if (result.length == 0) {
-                            res.render('user', { message: 'Hata!' });
-                            res.end();
-                        }
-                        res.render('user', { message: 'Kitap Alındı!' });
+                    connection.query(sql, [1, book_id, req.user.totalbook + 1, user_id, user_id, book_id, date.today],
+                        function(err, result) {
+                            if (err) throw err;
+                            if (result.length == 0) {
+                                res.render('user', { message: 'Hata!' });
+                                res.end();
+                            }
+                            res.render('user', { message: 'Kitap Alındı!' });
 
-                    });
+                        });
                 }
             }
         });
